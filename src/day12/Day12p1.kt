@@ -1,6 +1,7 @@
 package day12
 
 import readInput
+import kotlin.system.measureTimeMillis
 
 fun main() {
     fun part1(input: List<String>): Int {
@@ -10,8 +11,16 @@ fun main() {
     // Test
     val test = readInput(12, isTest = true)
     println("test=${part1(test)}")
+    return
 
-    // Read the input
+    // Final solution
     val input = readInput(12)
-    // println("answer=${part1(input)}")
+    val time = measureTimeMillis {
+        println("answer=${part1(input)}")
+    }
+    if (time < 1000) {
+        println("\ntook $time ms")
+    } else {
+        println("\ntook ${time / 1000f} s")
+    }
 }

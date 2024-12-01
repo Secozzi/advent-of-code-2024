@@ -4,11 +4,14 @@ import kotlin.io.path.createFile
 import kotlin.io.path.writeText
 
 fun main() {
-    (1..25).forEach { day ->
+    day@ for (day in 1..25) {
         val dayStr = day.toString().padStart(2, '0')
         val basePath = "src/day$dayStr"
+        try {
+            Path(basePath).createDirectory()
+        } catch (e: java.nio.file.FileAlreadyExistsException) {
 
-        Path(basePath).createDirectory()
+        }
         Path("$basePath/Day$dayStr.txt").createFile()
         Path("$basePath/Day${dayStr}_test.txt").createFile()
 
@@ -17,6 +20,7 @@ fun main() {
                 package day$$d
 
                 import readInput
+                import kotlin.system.measureTimeMillis
 
                 fun main() {
                     fun part$$part(input: List<String>): Int {
@@ -26,18 +30,30 @@ fun main() {
                     // Test
                     val test = readInput($$day, isTest = true)
                     println("test=${part$$part(test)}")
+                    return
 
-                    // Read the input
+                    // Final solution
                     val input = readInput($$day)
-                    // println("answer=${part$$part(input)}")
+                    val time = measureTimeMillis {
+                        println("answer=${part$$part(input)}")
+                    }
+                    if (time < 1000) {
+                        println("\ntook $time ms")
+                    } else {
+                        println("\ntook ${time / 1000f} s")
+                    }
                 }
                 
             """.trimIndent()
         }
 
-        (1..2).forEach { part ->
+        for (part in 1..2) {
             val body = fileTemplate(part, dayStr)
-            Path("$basePath/Day${dayStr}p$part.kt").createFile().writeText(body)
+            try {
+                Path("$basePath/Day${dayStr}p$part.kt").createFile().writeText(body)
+            } catch (e: java.nio.file.FileAlreadyExistsException) {
+                continue@day
+            }
         }
     }
 }
