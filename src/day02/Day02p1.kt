@@ -1,17 +1,28 @@
 package day02
 
 import readInput
+import kotlin.math.abs
 import kotlin.system.measureTimeMillis
+
+fun List<Int>.isSafe(): Boolean {
+    val isIncreasing = this[1] > this[0]
+
+    return zipWithNext().none { (c, n) ->
+        c == n || abs(c - n) > 3 || n > c != isIncreasing
+    }
+}
 
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        return input.count { line ->
+            val numbers = line.split(" ").map(String::toInt)
+            numbers.isSafe()
+        }
     }
 
     // Test
     val test = readInput(2, isTest = true)
     println("test=${part1(test)}")
-    return
 
     // Final solution
     val input = readInput(2)
