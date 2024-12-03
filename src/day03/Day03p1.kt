@@ -5,13 +5,16 @@ import kotlin.system.measureTimeMillis
 
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        val mulRegex = Regex("""mul\((\d{1,3}),(\d{1,3})\)""")
+
+        return input.flatMap(mulRegex::findAll).sumOf {
+            it.groupValues[1].toInt() * it.groupValues[2].toInt()
+        }
     }
 
     // Test
     val test = readInput(3, isTest = true)
     println("test=${part1(test)}")
-    return
 
     // Final solution
     val input = readInput(3)
