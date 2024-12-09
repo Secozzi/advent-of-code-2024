@@ -8,6 +8,10 @@ kotlin {
     }
 }
 
+dependencies {
+    implementation("com.michael-bull.kotlin-itertools:kotlin-itertools:1.0.0")
+}
+
 sourceSets {
     main {
         kotlin.srcDir("src")
