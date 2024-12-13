@@ -1,7 +1,6 @@
 package day06
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 fun main() {
     fun hasLoop(grid: List<List<Char>>, x: Int, y: Int, dir: Direction): Boolean {
@@ -30,7 +29,7 @@ fun main() {
         }
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: List<String>): Long {
         val grid = input.map(String::toMutableList)
 
         val (startX, startY) = getStartPos(grid)
@@ -51,21 +50,8 @@ fun main() {
         }
         println()
 
-        return count
+        return count.toLong()
     }
 
-    // Test
-    val test = readInput(6, isTest = true)
-    println("test=${part2(test)}")
-
-    // Final solution
-    val input = readInput(6)
-    val time = measureTimeMillis {
-        println("answer=${part2(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(6, ::part2, isTest = false)
 }

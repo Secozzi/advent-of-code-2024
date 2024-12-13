@@ -1,10 +1,9 @@
 package day04
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 fun main() {
-    fun wordCount(grid: List<CharArray>, word: String): Int {
+    fun wordCount(grid: List<CharArray>, word: String): Long {
         val directions = listOf(
             Pair(-1, -1), Pair(0, -1), Pair( 1, -1),
             Pair(-1,  0),              Pair( 1,  0),
@@ -28,27 +27,14 @@ fun main() {
             grid.indices.sumOf { y ->
                 directions.count { (dx, dy) -> isWordInDirection(x, y, dx, dy) }
             }
-        }
+        }.toLong()
     }
 
-    fun part1(input: List<String>): Int {
+    fun part1(input: List<String>): Long {
         val grid = input.map(String::toCharArray)
 
         return wordCount(grid, "XMAS")
     }
 
-    // Test
-    val test = readInput(4, isTest = true)
-    println("test=${part1(test)}")
-
-    // Final solution - 2593
-    val input = readInput(4)
-    val time = measureTimeMillis {
-        println("answer=${part1(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(4, ::part1, isTest = false)
 }

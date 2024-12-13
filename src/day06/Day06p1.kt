@@ -1,7 +1,6 @@
 package day06
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 enum class Direction(val dx: Int, val dy: Int) {
     Up(0, 1),
@@ -60,27 +59,14 @@ fun getStartPos(grid: List<List<Char>>): Pair<Int, Int> {
 }
 
 fun main() {
-    fun part1(input: List<String>): Int {
+    fun part1(input: List<String>): Long {
         val grid = input.map(String::toList)
 
         val (startX, startY) = getStartPos(grid)
         val direction = Direction.Up
 
-        return getPositions(grid, startX, startY, direction).size
+        return getPositions(grid, startX, startY, direction).size.toLong()
     }
 
-    // Test
-    val test = readInput(6, isTest = true)
-    println("test=${part1(test)}")
-
-    // Final solution
-    val input = readInput(6)
-    val time = measureTimeMillis {
-        println("answer=${part1(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(6, ::part1, isTest = false)
 }

@@ -1,10 +1,9 @@
 package day08
 
 import com.github.michaelbull.itertools.combinations
-import readInput
+import printAnswers
 import kotlin.collections.component1
 import kotlin.collections.component2
-import kotlin.system.measureTimeMillis
 
 data class Position(
     val x: Int,
@@ -36,7 +35,7 @@ fun getFrequencyMapping(grid: List<List<Char>>): Map<Char, List<Position>> {
 }
 
 fun main() {
-    fun part1(input: List<String>): Int {
+    fun part1(input: List<String>): Long {
         val grid = input.map(String::toList)
         val map = getFrequencyMapping(grid)
 
@@ -51,20 +50,8 @@ fun main() {
             .filter { p -> p.x in grid.first().indices && p.y in grid.indices }
             .distinct()
             .size
+            .toLong()
     }
 
-    // Test
-    val test = readInput(8, isTest = true)
-    println("test=${part1(test)}")
-
-    // Final solution
-    val input = readInput(8)
-    val time = measureTimeMillis {
-        println("answer=${part1(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(8, ::part1, isTest = false)
 }

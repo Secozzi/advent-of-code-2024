@@ -1,7 +1,6 @@
 package day09
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 sealed class SizedBlock(val length: Int) {
     class Space(length: Int) : SizedBlock(length)
@@ -59,18 +58,5 @@ fun main() {
         return blockList.checkSum()
     }
 
-    // Test
-    val test = readInput(9, isTest = true)
-    println("test=${part2(test)}")
-
-    // Final solution
-    val input = readInput(9)
-    val time = measureTimeMillis {
-        println("answer=${part2(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(9, ::part2, isTest = false)
 }

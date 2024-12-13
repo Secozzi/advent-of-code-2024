@@ -1,14 +1,13 @@
 package day04
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 fun main() {
     fun IntRange.dropLast(n: Int): IntRange {
         return IntRange(start = start, endInclusive = endInclusive - n)
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: List<String>): Long {
         val grid = input.map(String::toCharArray)
 
         return grid.first().indices.dropLast(2).sumOf { x ->
@@ -18,21 +17,8 @@ fun main() {
 
                 grid[y + 1][x + 1] == 'A' && firstDiagonal && secondDiagonal
             }
-        }
+        }.toLong()
     }
 
-    // Test
-    val test = readInput(4, isTest = true)
-    println("test=${part2(test)}")
-
-    // Final solution
-    val input = readInput(4)
-    val time = measureTimeMillis {
-        println("answer=${part2(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(4, ::part2, isTest = false)
 }

@@ -1,10 +1,9 @@
 package day08
 
 import com.github.michaelbull.itertools.combinations
-import readInput
+import printAnswers
 import kotlin.collections.component1
 import kotlin.collections.component2
-import kotlin.system.measureTimeMillis
 
 fun main() {
     fun getAntiNodes(pos: Pair<Position, Position>): Pair<Sequence<Position>, Sequence<Position>> {
@@ -16,7 +15,7 @@ fun main() {
         return Pair(seq1, seq2)
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: List<String>): Long {
         val grid = input.map(String::toList)
         val map = getFrequencyMapping(grid)
 
@@ -34,20 +33,8 @@ fun main() {
         }
             .distinct()
             .size
+            .toLong()
     }
 
-    // Test
-    val test = readInput(8, isTest = true)
-    println("test=${part2(test)}")
-
-    // Final solution
-    val input = readInput(8)
-    val time = measureTimeMillis {
-        println("answer=${part2(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(8, ::part2, isTest = false)
 }

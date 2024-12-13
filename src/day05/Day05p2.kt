@@ -1,7 +1,6 @@
 package day05
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 fun main() {
     fun List<Int>.fix(rules: List<Pair<Int, Int>>): List<Int> {
@@ -20,7 +19,7 @@ fun main() {
         return result
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: List<String>): Long {
         val (rulesTxt, pagesTxt) = input.joinToString("\n").split("\n\n")
         val rules = rulesTxt.lines().map { it.split("|").let { (a, b) -> a.toInt() to b.toInt() } }
         val pages = pagesTxt.lines().map { it.split(",").map(String::toInt) }
@@ -34,20 +33,8 @@ fun main() {
                 }
                 fixed.middle()
             }
+            .toLong()
     }
 
-    // Test
-    val test = readInput(5, isTest = true)
-    println("test=${part2(test)}")
-
-    // Final solution
-    val input = readInput(5)
-    val time = measureTimeMillis {
-        println("answer=${part2(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(5, ::part2, isTest = false)
 }

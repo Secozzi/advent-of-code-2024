@@ -1,7 +1,6 @@
 package day07
 
-import readInput
-import kotlin.system.measureTimeMillis
+import printAnswers
 
 fun main() {
     fun isValid(
@@ -25,18 +24,5 @@ fun main() {
         }
     }
 
-    // Test
-    val test = readInput(7, isTest = true)
-    println("test=${part1(test)}")
-
-    // Final solution
-    val input = readInput(7)
-    val time = measureTimeMillis {
-        println("answer=${part1(input)}")
-    }
-    if (time < 1000) {
-        println("\ntook $time ms")
-    } else {
-        println("\ntook ${time / 1000f} s")
-    }
+    printAnswers(7, ::part1, isTest = false)
 }

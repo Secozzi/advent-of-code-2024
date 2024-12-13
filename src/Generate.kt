@@ -19,29 +19,14 @@ fun main() {
             $$"""
                 package day$$d
 
-                import readInput
-                import kotlin.system.measureTimeMillis
+                import printAnswers
 
                 fun main() {
-                    fun part$$part(input: List<String>): Int {
-                        return input.size
+                    fun part$$part(input: List<String>): Long {
+                        return input.size.toLong()
                     }
-
-                    // Test
-                    val test = readInput($$day, isTest = true)
-                    println("test=${part$$part(test)}")
-                    return
-
-                    // Final solution
-                    val input = readInput($$day)
-                    val time = measureTimeMillis {
-                        println("answer=${part$$part(input)}")
-                    }
-                    if (time < 1000) {
-                        println("\ntook $time ms")
-                    } else {
-                        println("\ntook ${time / 1000f} s")
-                    }
+                    
+                    printAnswers($$day, ::part$$part, isTest = true)
                 }
                 
             """.trimIndent()
